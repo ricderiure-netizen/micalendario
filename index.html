@@ -1,28 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
   <meta charset='utf-8' />
+  <script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
   <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.10/index.global.min.js'></script>
   
   <style>
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: transparent; }
     #calendar { max-width: 100%; background: white; padding: 15px; border-radius: 12px; border: 1px solid #e0e0e0; }
-    
-    /* Cabecera del calendario con tu color verde */
     .fc-theme-standard .fc-toolbar-title { color: #4F7942; font-size: 1.4em; }
     .fc .fc-button-primary { background-color: #4F7942 !important; border-color: #4F7942 !important; }
     .fc .fc-button-primary:disabled { background-color: #8da785 !important; }
-
-    /* Estilo para los días OCUPADOS (Sincronizados de Booking) */
-    .fc-event { 
-        background-color: #d9534f !important; /* Rojo suave para ocupado */
-        border: none !important; 
-        color: white !important; 
-        text-align: center;
-        font-weight: bold;
-    }
-    /* Estilo para los días del calendario */
+    .fc-event { background-color: #d9534f !important; border: none !important; color: white !important; text-align: center; font-weight: bold; cursor: default; }
     .fc-daygrid-day-number { color: #333; text-decoration: none; padding: 5px !important; }
     .fc-col-header-cell-cushion { color: #4F7942; text-decoration: none; }
   </style>
@@ -35,15 +25,16 @@
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        locale: 'ca', // Puesto en Catalán como tu web
-        firstDay: 1,  // Semana empieza en Lunes
+        locale: 'ca',
+        firstDay: 1,
         headerToolbar: { left: 'prev,next', center: 'title', right: 'today' },
         events: {
+          // Usamos AllOrigins que es más estable para Booking
           url: 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://ical.booking.com/v1/export?t=43cb68dd-d0fd-4603-8cad-f937def8f76e'),
           format: 'ics'
         },
         eventContent: function(arg) {
-          return { html: '<b>OCUPAT</b>' }; // Ocupat
+          return { html: '<b>OCUPAT</b>' };
         }
       });
       calendar.render();

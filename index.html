@@ -39,8 +39,7 @@
         firstDay: 1,  // Semana empieza en Lunes
         headerToolbar: { left: 'prev,next', center: 'title', right: 'today' },
         events: {
-          // REEMPLAZA ESTA URL POR TU ENLACE .ICS DE BOOKING
-          url: 'https://corsproxy.io/?' + encodeURIComponent('https://ical.booking.com/v1/export?t=43cb68dd-d0fd-4603-8cad-f937def8f76e'),
+          url: 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://ical.booking.com/v1/export?t=43cb68dd-d0fd-4603-8cad-f937def8f76e'),
           format: 'ics'
         },
         eventContent: function(arg) {
